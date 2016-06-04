@@ -12,7 +12,9 @@ class FormulaGrammar(Grammar):
     integer             = r"\d+", IntegerConverter
     decimal             = r"\d+\.\d+", DecimalConverter
     number              = r"<decimal>|<integer>"
-    variable            = r"[a-zA-Z]+\w*", Variable
+    identifier          = r"[a-zA-Z]+\w*"
+    attr                = r"\.<identifier>"
+    variable            = r"<identifier><attr>*", Variable
     op                  = r"\+", OpConverter
     primitive           = r"<variable>|<number>"
     expr                = r"<primitive>\s*<op>\s*<primitive>", Expression
