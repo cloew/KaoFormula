@@ -1,10 +1,11 @@
+from .expression import Expression
 from .identifier_converter import IdentifierConverter
 from .number_converter import DecimalConverter, IntegerConverter
+from .op_converter import OpConverter
 from kao_parser import Grammar
 
-def Formula(value):
-    print(value)
-    return value
+def Formula(expr):
+    return expr
 
 class FormulaGrammar(Grammar):
     """ Grammar to use when parsing a Formula """
@@ -12,4 +13,7 @@ class FormulaGrammar(Grammar):
     decimal             = r"\d+\.\d+", DecimalConverter
     number              = r"<decimal>|<integer>"
     identifier          = r"[a-zA-Z]+\w*", IdentifierConverter
-    formula             = r"<identifier>|<number>", Formula
+    op                  = r"\+", OpConverter
+    primitive           = r"<identifier>|<number>"
+    expr                = r"<primitive>\s*<op>\s*<primitive>", Expression
+    formula             = r"\s*<expr>\s*", Formula
