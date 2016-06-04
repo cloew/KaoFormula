@@ -6,4 +6,5 @@ setup(name='kao_formula',
       author='',
       author_email='',
       packages=['kao_formula'],
+      install_requires=['kao_parser'],
      )
