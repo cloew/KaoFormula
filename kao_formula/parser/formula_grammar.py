@@ -1,5 +1,5 @@
 from .expression import Expression
-from .identifier import Identifier
+from .variable import Variable
 from .number_converter import DecimalConverter, IntegerConverter
 from .op_converter import OpConverter
 from kao_parser import Grammar
@@ -12,8 +12,8 @@ class FormulaGrammar(Grammar):
     integer             = r"\d+", IntegerConverter
     decimal             = r"\d+\.\d+", DecimalConverter
     number              = r"<decimal>|<integer>"
-    identifier          = r"[a-zA-Z]+\w*", Identifier
+    variable            = r"[a-zA-Z]+\w*", Variable
     op                  = r"\+", OpConverter
-    primitive           = r"<identifier>|<number>"
+    primitive           = r"<variable>|<number>"
     expr                = r"<primitive>\s*<op>\s*<primitive>", Expression
     formula             = r"\s*<expr>\s*", Formula

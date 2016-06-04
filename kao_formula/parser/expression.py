@@ -1,4 +1,4 @@
-from .identifier import Identifier
+from .variable import Variable
 
 class Expression:
     """ Represents an Expression """
@@ -15,7 +15,7 @@ class Expression:
         
     def get_value(self, parameter, scope):
         """ Return the proper value to use in the given scope """
-        if isinstance(parameter, Identifier):
+        if isinstance(parameter, Variable):
             return parameter.get_value(**scope)
         else:
             return parameter
